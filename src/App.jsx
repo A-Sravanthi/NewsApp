@@ -19,7 +19,7 @@ import {
 } from "@mui/material";
 import { Search as SearchIcon, Brightness4, Brightness7 } from "@mui/icons-material";
 
-const API_KEY = "5492e88dfab372a261f53fa5dc9f7eb2"; // Replace
+const API_KEY = "5492e88dfab372a261f53fa5dc9f7eb2"; 
 const BASE_URL = "https://gnews.io/api/v4/search";
 
 function App() {
@@ -55,7 +55,7 @@ function App() {
 
   useEffect(() => {
     fetchNews(true);
-    // eslint-disable-next-line
+   
   }, []);
 
   const handleSearch = (e) => {
@@ -70,7 +70,7 @@ function App() {
 
   useEffect(() => {
     if (page > 1) fetchNews();
-    // eslint-disable-next-line
+    
   }, [page]);
 
   return (
