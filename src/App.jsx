@@ -37,17 +37,21 @@ function App() {
   });
 
   const fetchNews = async (reset = false) => {
-    try {
-      const res = await fetch(
-        `${BASE_URL}?q=${searchQuery}&lang=en&max=10&page=${page}&token=${API_KEY}`
-      );
-      const data = await res.json();
-      const newArticles = data.articles || [];
-      setArticles(reset ? newArticles : [...articles, ...newArticles]);
-    } catch (err) {
-      console.error("Error fetching news:", err);
-    }
-  };
+  try {
+    const proxyUrl = "https://api.allorigins.win/get?url=";
+    const targetUrl = `${BASE_URL}?q=${searchQuery}&lang=en&max=10&page=${page}&token=${API_KEY}`;
+    const res = await fetch(proxyUrl + encodeURIComponent(targetUrl));
+
+    const wrapped = await res.json();
+    const data = JSON.parse(wrapped.contents);
+
+    const newArticles = data.articles || [];
+    setArticles(reset ? newArticles : [...articles, ...newArticles]);
+  } catch (err) {
+    console.error("Error fetching news:", err);
+  }
+};
+
 
   useEffect(() => {
     fetchNews(true);
